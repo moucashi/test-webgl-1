@@ -2,20 +2,17 @@ import { useEffect, useRef } from 'react'
 import './App.css'
 import { setup } from "./render.ts";
 
+
+
 function App() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
+    const firstRenderRef = useRef<boolean>(true)
     
     useEffect(() => {
         const canvas = canvasRef.current
-        if (canvas) {
+        if (canvas && firstRenderRef.current) {
             setup(canvas)
-            
-            // const {
-            //     canvas,
-            //     context,
-            //     format,
-            //     device
-            // } = await setup(canvas)
+            firstRenderRef.current = false
         }
     }, [])
     
